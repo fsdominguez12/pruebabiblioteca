@@ -1,0 +1,186 @@
+<mat-tab-group mat-align-tabs="center" (selectedIndexChange)="selected.setValue($event)"
+  [selectedIndex]="selected.value" backgroundColor="primary" color="warn">
+  <mat-tab label="NUEVO CURSO">
+
+    <br>
+
+    <mat-card class="example-card" style="background: #f7f2dc">
+      <mat-progress-bar *ngIf="loaderGuardar" mode="indeterminate"></mat-progress-bar>
+      <form [formGroup]="formGrupos">
+        <mat-card-content style="background: #f7f2dc">
+          <mat-grid-list cols="2" rowHeight="5:0.9">
+            <h3>CURSOS</h3>
+            <h4>DATOS DEL CURSO</h4>
+            <div>
+              <mat-grid-tile>
+                <mat-form-field appearance="outline">
+                  <mat-label>Nombre del curso</mat-label>
+                  <input matInput formControlName="nombre">
+                </mat-form-field>
+              </mat-grid-tile>
+              <mat-grid-tile rowspan="2">
+                <mat-form-field appearance="outline">
+                  <mat-label>Actividades</mat-label>
+                  <textarea matInput formControlName="actividades"></textarea>
+                </mat-form-field>
+              </mat-grid-tile>
+              <mat-grid-tile>
+                <mat-form-field appearance="outline">
+                  <mat-label>Nombre del Responsable</mat-label>
+                  <input matInput formControlName="responsable">
+                </mat-form-field>
+              </mat-grid-tile>
+
+            </div>
+
+            <div>
+              <mat-grid-tile>
+                <mat-form-field appearance="outline">
+                  <mat-label>Inicio y fin de curso</mat-label>
+                  <mat-date-range-input [rangePicker]="picker">
+                    <input matStartDate formControlName="fechaInicio" placeholder="Start date">
+                    <input matEndDate formControlName="fechaFin" placeholder="End date">
+                  </mat-date-range-input>
+                  <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-date-range-picker #picker></mat-date-range-picker>
+                </mat-form-field>
+              </mat-grid-tile>
+
+              <mat-grid-tile>
+                <mat-form-field appearance="outline">
+                  <mat-label>Materiales</mat-label>
+                  <input matInput formControlName="materiales">
+                </mat-form-field>
+              </mat-grid-tile>
+
+
+              <mat-grid-tile>
+                <mat-form-field color="accent" appearance="outline">
+                  <mat-label>Fecha máxima de inscripción</mat-label>
+                  <input matInput [matDatepicker]="picker1" formControlName="fechaMaxInscripcion"
+                    [max]="formGrupos.getRawValue().fechaFin">
+                  <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                  <mat-datepicker #picker1></mat-datepicker>
+                </mat-form-field>
+              </mat-grid-tile>
+
+
+              <mat-grid-tile>
+                <mat-form-field appearance="outline">
+                  <mat-label>Numero máximo de participantes</mat-label>
+                  <input type="number" matInput formControlName="numParticipantes">
+                </mat-form-field>
+              </mat-grid-tile>
+
+
+
+
+            </div>
+
+            <div>
+              <mat-grid-tile>
+                <mat-form-field appearance="outline">
+                  <mat-label>Lugar donde se llevara a cabo</mat-label>
+                  <input matInput formControlName="lugar">
+                </mat-form-field>
+              </mat-grid-tile>
+              <!--              <mat-grid-tile rowspan="2">-->
+              <!--                <mat-form-field appearance="outline">-->
+              <!--                  <mat-label>Observación</mat-label>-->
+              <!--                  <textarea matInput formControlName="observaciones"></textarea>-->
+              <!--                </mat-form-field>-->
+              <!--              </mat-grid-tile>-->
+              <mat-grid-tile rowspan="2">
+                <mat-form-field appearance="outline">
+                  <mat-label>Descripción</mat-label>
+                  <textarea matInput formControlName="descripcion"></textarea>
+                </mat-form-field>
+              </mat-grid-tile>
+
+            </div>
+
+          </mat-grid-list>
+        </mat-card-content>
+        <button mat-flat-button color="warn" [disabled]="formGrupos.invalid" (click)="guardarCliente()">GUARDAR
+        </button>
+      </form>
+    </mat-card>
+
+  </mat-tab>
+  <mat-tab label="VER CURSOS">
+    <br>
+    <mat-card class="bordeev" style="width: 90%;">
+      <mat-card class="example-card-two" class="colorCrema">
+        <mat-progress-bar *ngIf="loaderActualizar" mode="indeterminate"></mat-progress-bar>
+        <mat-card-content>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Buscar Curso</mat-label>
+            <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Curso Pintura" #input>
+            <mat-icon matSuffix>find_in_page</mat-icon>
+          </mat-form-field>
+
+          <div class="mat-elevation-z8">
+            <table mat-table [dataSource]="dataSource" matSort class="colorCrema">
+
+              <!-- ID Column -->
+              <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> ID</th>
+                <td class="textoInicio" mat-cell *matCellDef="let row" id="idCurso"> {{row.id}} </td>
+              </ng-container>
+
+              <!-- Progress Column -->
+              <ng-container matColumnDef="nombre">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> NOMBRE </th>
+                <td class="textoInicio" mat-cell *matCellDef="let row"> {{row.nombre|uppercase}}</td>
+              </ng-container>
+
+              <!-- Name Column -->
+              <ng-container matColumnDef="lugar">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> LUGAR</th>
+                <td class="textoInicio" mat-cell *matCellDef="let row"> {{row.lugar|uppercase}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="responsable">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> RESPONSABLE</th>
+                <td class="textoInicio" mat-cell *matCellDef="let row"> {{row.responsable|uppercase}} </td>
+              </ng-container>
+
+              <!-- Fruit Column -->
+              <ng-container matColumnDef="fechaInicio">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> FECHA INICIO</th>
+                <td class="textoInicio" mat-cell *matCellDef="let row"> {{row.fechaInicio}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="fechaFin">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> FECHA FIN</th>
+                <td class="textoInicio" mat-cell *matCellDef="let row"> {{row.fechaFin}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="Editar">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> ACCIÓN</th>
+                <td class="textoInicio" mat-cell *matCellDef="let row">
+                  <button mat-flat-button color="primary"
+                          (click)="actualizarCursos(row.id)">EDITAR</button>
+                </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+              <!-- Row shown when there is no matching data. -->
+              <tr class="mat-row" *matNoDataRow>
+                <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+              </tr>
+            </table>
+
+            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users" class="colorCrema">
+            </mat-paginator>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </mat-card>
+
+  </mat-tab>
+</mat-tab-group>

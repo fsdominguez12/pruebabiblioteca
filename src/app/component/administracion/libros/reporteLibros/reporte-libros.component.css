@@ -1,0 +1,62 @@
+.container{
+  background-color: #f7f2dc;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  display: table;
+  width: 95%;
+  text-align: center;
+  margin: 1vh auto;
+
+}
+.header{
+  margin-top: 1%;
+}
+.left{
+  position: absolute;
+  left: 2.5%;
+  width: 39.8%;
+  background-color: #f7f2dc;
+}
+.right{
+  position: absolute;
+  right: 2.5%;
+  width: 55.5%;
+  background-color: #f7f2dc;
+}
+
+mat-grid-tile {
+
+}
+.filter{
+  margin: 0 auto;
+  width: 95%;
+}
+.seleccion{
+  margin: 0 auto;
+  width: 95%;
+}
+button{
+  margin: 1vh auto;
+  width: 95%;
+}
+.example-section {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  height: 60px;
+}
+.example-margin {
+  margin: 1vh 10px;
+}
+
+mat-form-field{
+  width: 50px;
+}
+
+.dates{
+  width: 95%;
+  font-size: 15px;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+
+}
+

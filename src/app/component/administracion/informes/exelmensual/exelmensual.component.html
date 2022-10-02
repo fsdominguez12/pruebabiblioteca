@@ -1,0 +1,194 @@
+<div>
+  <mat-card class="mat1">
+    <mat-progress-bar *ngIf="carga" mode="indeterminate"></mat-progress-bar>
+    <h2>INGRESE EL MES PARA OBTENER EL RESUMEN:</h2>
+    <mat-form-field appearance="outline"  class="fecha">
+      <mat-label>Ingrese el Mes</mat-label>
+      <input matInput type="month" #meses>
+    </mat-form-field>
+    <div>
+      <button mat-flat-button color="primary" (click)="consultarDatos(meses)">CONSULTAR</button>
+      <button mat-raised-button color="warn" style="margin-left: 1vh" (click)="exportToExcel(meses)" *ngIf="ver">
+        <mat-icon>arrow_downward</mat-icon>
+        <mat-icon>insert_drive_file</mat-icon>
+      </button>
+    </div>
+  </mat-card>
+  <mat-card class="mat2" *ngIf="ver">
+    <cdk-virtual-scroll-viewport orientation="horizontal" appendOnly itemSize="50" class="example-viewport">
+      <mat-card-content>
+        <mat-form-field appearance="standard">
+          <mat-label>Filter</mat-label>
+          <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
+        </mat-form-field>
+
+        <div class="mat-elevation-z8">
+          <table mat-table [dataSource]="dataSource" matSort id="table">
+
+            <!-- ID Column -->
+            <ng-container matColumnDef="codigo">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> CODIGO</th>
+              <td mat-cell *matCellDef="let row">{{row.codigo}} </td>
+            </ng-container>
+
+            <!-- Progress Column -->
+            <ng-container matColumnDef="no">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> NOº</th>
+              <td mat-cell *matCellDef="let row;let i = index"><strong>{{i+1}}</strong></td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="fecha">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> FECHA</th>
+              <td mat-cell *matCellDef="let row"> {{row.fecha}} </td>
+            </ng-container>
+
+            <!-- Fruit Column -->
+            <ng-container matColumnDef="apellidos">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> APELLIDOS</th>
+              <td mat-cell *matCellDef="let row"> {{row.apellidos}} </td>
+            </ng-container>
+
+            <!-- Fruit Column -->
+            <ng-container matColumnDef="nombres">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> NOMBRES</th>
+              <td mat-cell *matCellDef="let row"> {{row.nombres}} </td>
+            </ng-container>
+
+            <!-- Fruit Column -->
+            <ng-container matColumnDef="cedula">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> CEDULA</th>
+              <td mat-cell *matCellDef="let row"> {{row.cedula}} </td>
+            </ng-container>
+
+            <!-- Fruit Column -->
+            <ng-container matColumnDef="fecha_nacimiento">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> FECHA DE NACIMIENTO</th>
+              <td mat-cell *matCellDef="let row"> {{row.fecha_nacimiento}} </td>
+            </ng-container>
+
+            <!-- Fruit Column -->
+            <ng-container matColumnDef="edad">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> EDAD</th>
+              <td mat-cell *matCellDef="let row"> {{row.edad}} </td>
+            </ng-container>
+
+            <!-- Fruit Column -->
+            <ng-container matColumnDef="genero">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> GENERO</th>
+              <td mat-cell *matCellDef="let row">
+                <strong *ngIf="row.genero=='MASCULINO'">M</strong>
+                <strong *ngIf="row.genero=='FEMENINO'">F</strong>
+                <strong *ngIf="row.genero=='OTROS'">OTRO</strong>
+              </td>
+            </ng-container>
+
+            <!-- Fruit Column -->
+            <ng-container matColumnDef="estado_civil">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> ESTADO CIVIL</th>
+              <td mat-cell *matCellDef="let row">{{row.estado_civil}}</td>
+            </ng-container>
+
+            <!-- Fruit Column -->
+            <ng-container matColumnDef="provincia">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> PROVINCIA</th>
+              <td mat-cell *matCellDef="let row">{{row.provincia}}</td>
+            </ng-container>
+
+            <!-- Fruit Column -->
+            <ng-container matColumnDef="canton">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> CANTON</th>
+              <td mat-cell *matCellDef="let row">{{row.canton}}</td>
+            </ng-container>
+
+            <!-- Fruit Column -->
+            <ng-container matColumnDef="parroquia">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> PARROQUIA</th>
+              <td mat-cell *matCellDef="let row">{{row.parroquia}}</td>
+            </ng-container>
+
+            <!-- Fruit Column -->
+            <ng-container matColumnDef="barrio">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> BARRIO</th>
+              <td mat-cell *matCellDef="let row">{{row.barrio}}</td>
+            </ng-container>
+
+            <!-- Fruit Column -->
+            <ng-container matColumnDef="discapacidad">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> DISPACIDAD</th>
+              <td mat-cell *matCellDef="let row">
+                <strong *ngIf="row.discapacidad==true">SI</strong>
+                <strong *ngIf="row.discapacidad==false">NO</strong>
+              </td>
+            </ng-container>
+
+            <!-- Fruit Column -->
+            <ng-container matColumnDef="email">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> CORREO</th>
+              <td mat-cell *matCellDef="let row">{{row.email}}</td>
+            </ng-container>
+
+            <!-- Fruit Column -->
+            <ng-container matColumnDef="telefono">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> NUMERO DE CONTACTO</th>
+              <td mat-cell *matCellDef="let row">{{row.telefono}}</td>
+            </ng-container>
+
+            <!-- Fruit Column -->
+            <ng-container matColumnDef="repositorio">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> REPOSITORIO</th>
+              <td mat-cell *matCellDef="let row">{{row.repositorio}}</td>
+            </ng-container>
+
+            <!-- Fruit Column -->
+            <ng-container matColumnDef="biblioteca">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> BIBLIOTECA</th>
+              <td mat-cell *matCellDef="let row">{{row.biblioteca}}</td>
+            </ng-container>
+
+            <!-- Fruit Column -->
+            <ng-container matColumnDef="computo">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> INTERNET</th>
+              <td mat-cell *matCellDef="let row">{{row.computo}}</td>
+            </ng-container>
+
+            <!-- Fruit Column -->
+            <ng-container matColumnDef="copias">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> IMPRESIONES/COPIAS</th>
+              <td mat-cell *matCellDef="let row">{{row.copias}}</td>
+            </ng-container>
+
+            <!-- Fruit Column -->
+            <ng-container matColumnDef="talleres">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> TALLERES</th>
+              <td mat-cell *matCellDef="let row">{{row.talleres}}</td>
+            </ng-container>
+
+            <!-- Fruit Column -->
+            <ng-container matColumnDef="nombretaller">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> NOMBRE TALLER</th>
+              <td mat-cell *matCellDef="let row">{{row.nombretaller}}</td>
+            </ng-container>
+
+            <!-- Fruit Column -->
+            <ng-container matColumnDef="verificables">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> VERIFICABLES</th>
+              <td mat-cell *matCellDef="let row">{{row.verificables}}</td>
+            </ng-container>
+
+
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+            <!-- Row shown when there is no matching data. -->
+            <tr class="mat-row" *matNoDataRow>
+              <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+            </tr>
+          </table>
+        </div>
+      </mat-card-content>
+    </cdk-virtual-scroll-viewport>
+
+  </mat-card>
+</div>

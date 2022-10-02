@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+<mat-drawer-container class="example-container" autosize>
+  <mat-drawer class="example-sidenav" mode="side" opened>
+    <h3>{{persona.rol}}</h3>
+    <h3>{{persona.nombres}} {{persona.apellidos}}</h3>
+    <div>
+      <button class="botones" mat-raised-button [routerLink]="'/panel/biblioteca/bienvenida'">
+        <mat-icon>home</mat-icon>
+        HOME
+      </button>
+      <!--USUARIOS-->
+      <button class="botones" mat-raised-button [routerLink]="'/panel/biblioteca/administracionusuarios'"
+              [disabled]="persona.idRol!=1">
+        <mat-icon>person_add</mat-icon>
+        USUARIOS
+      </button>
+      <!--CLIENTE-->
+      <button class="botones" mat-raised-button [routerLink]="'/panel/biblioteca/administracionclientes'"
+              [disabled]="persona.idRol!=1 && persona.idRol!=3">
+        <mat-icon>person_add</mat-icon>
+        CLIENTES
+      </button>
+      <!--CURSOS-->
+      <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" class="botones">
+        <mat-expansion-panel-header>
+          <button mat-flat-button>
+            <mat-icon>school</mat-icon>
+            CURSOS
+          </button>
+        </mat-expansion-panel-header>
+        <button class="botones" mat-flat-button [routerLink]="'/panel/biblioteca/cursos'"
+                [disabled]="persona.idRol!=1 && persona.idRol!=2">
+          M-CURSOS
+        </button>
+        <button class="botones" mat-flat-button [routerLink]="'/panel/biblioteca/inscripcioncurso'"
+                [disabled]="persona.idRol!=1 && persona.idRol!=3">
+          INSCRIPCION
+        </button>
+        <button class="botones" mat-flat-button [routerLink]="'/panel/biblioteca/asistenciacurso'"
+                [disabled]="persona.idRol!=1 && persona.idRol!=3">
+          ASISTENCIA
+        </button>
+        <button class="botones" mat-flat-button [routerLink]="'/panel/biblioteca/reportecurso'"
+                [disabled]="persona.idRol!=1 && persona.idRol!=4">
+          REPORTE
+        </button>
+      </mat-expansion-panel>
+      <!--TALLERES-->
+      <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" class="botones">
+        <mat-expansion-panel-header>
+          <button mat-flat-button>
+            <mat-icon>star</mat-icon>
+            TALLERES
+          </button>
+        </mat-expansion-panel-header>
+        <button class="botones" mat-flat-button [routerLink]="'/panel/biblioteca/crudtaller'"
+                [disabled]="persona.idRol!=1 && persona.idRol!=2">
+          M-TALLERES
+        </button>
+        <button class="botones" mat-flat-button [routerLink]="'/panel/biblioteca/inscripciontaller'"
+                [disabled]="persona.idRol!=1 && persona.idRol!=3">
+          INSCRIPCION
+        </button>
+        <button class="botones" mat-flat-button [routerLink]="'/panel/biblioteca/asistenciataller'"
+                [disabled]="persona.idRol!=1 && persona.idRol!=3">
+          ASISTENCIA
+        </button>
+        <button class="botones" mat-flat-button [routerLink]="'/panel/biblioteca/reportetaller'"
+                [disabled]="persona.idRol!=1 && persona.idRol!=4">
+          REPORTE
+        </button>
+      </mat-expansion-panel>
+      <!--LIBROS-->
+      <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" class="botones">
+        <mat-expansion-panel-header>
+          <button mat-flat-button>
+            <mat-icon> local_library</mat-icon>
+            LIBROS
+          </button>
+        </mat-expansion-panel-header>
+        <button class="botones" mat-flat-button [routerLink]="'/panel/biblioteca/crudlibro'"
+                [disabled]="persona.idRol!=1 && persona.idRol!=2">
+          M-LIBROS
+        </button>
+        <button class="botones" mat-flat-button [routerLink]="'/panel/biblioteca/prestamolibro'"
+                [disabled]="persona.idRol!=1 && persona.idRol!=3">
+          PRESTAMO
+        </button>
+        <button class="botones" mat-flat-button [routerLink]="'/panel/biblioteca/reportelibros'"
+                [disabled]="persona.idRol!=1 && persona.idRol!=4">
+          REPORTE
+        </button>
+      </mat-expansion-panel>
+      <!--COMPUTO-->
+      <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" class="botones">
+        <mat-expansion-panel-header>
+          <button mat-flat-button>
+            <mat-icon>desktop_windows</mat-icon>
+            COMPUTO
+          </button>
+        </mat-expansion-panel-header>
+        <button class="botones" mat-flat-button [routerLink]="'/panel/biblioteca/crudcomputo'"
+                [disabled]="persona.idRol!=1 && persona.idRol!=2">
+          INVENTARIO
+        </button>
+        <button class="botones" mat-flat-button [routerLink]="'/panel/biblioteca/prestamocomputo'"
+                [disabled]="persona.idRol!=1 && persona.idRol!=3">
+          PRESTAMO
+        </button>
+        <button class="botones" mat-flat-button [routerLink]="'/panel/biblioteca/reportecomputo'"
+                [disabled]="persona.idRol!=1 && persona.idRol!=4">
+          REPORTE
+        </button>
+      </mat-expansion-panel>
+      <!--IMPRESIONES/COPIAS-->
+      <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" class="botones">
+        <mat-expansion-panel-header style="height: 75px">
+          <button mat-flat-button>
+            <mat-icon> local_printshop</mat-icon>
+            IMPRESIONES <br>/COPIAS
+          </button>
+        </mat-expansion-panel-header>
+        <button class="botones" mat-flat-button [routerLink]="'/panel/biblioteca/usoImpresionCopia'"
+                [disabled]="persona.idRol!=1 && persona.idRol!=3">
+          USO
+        </button>
+        <button class="botones" mat-flat-button [routerLink]="'/panel/biblioteca/reporteimpresioncopia'"
+                [disabled]="persona.idRol!=1 && persona.idRol!=4">
+          REPORTE
+        </button>
+      </mat-expansion-panel>
+      <!--EVENTOS-->
+      <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" class="botones">
+        <mat-expansion-panel-header>
+          <button mat-flat-button>
+            <mat-icon>tag_faces</mat-icon>
+            EVENTOS
+          </button>
+        </mat-expansion-panel-header>
+        <button class="botones" mat-flat-button [routerLink]="'/panel/biblioteca/crudevento'"
+                [disabled]="persona.idRol!=1 && persona.idRol!=2">
+          M-EVENTO
+        </button>
+        <button class="botones" mat-flat-button [routerLink]="'/panel/biblioteca/registroevento'"
+                [disabled]="persona.idRol!=1 && persona.idRol!=2">
+          REGISTRO
+        </button>
+        <button class="botones" mat-flat-button [routerLink]="'/panel/biblioteca/reporteeventos'"
+                [disabled]="persona.idRol!=1 && persona.idRol!=4">
+          REPORTE
+        </button>
+      </mat-expansion-panel>
+
+      <!--EVENTOS-->
+      <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" class="botones">
+        <mat-expansion-panel-header>
+          <button mat-flat-button>
+            <mat-icon>receipt</mat-icon>
+            VARIOS
+          </button>
+        </mat-expansion-panel-header>
+        <button class="botones" mat-flat-button [routerLink]="'/panel/biblioteca/crudServiciosVarios'"
+                [disabled]="persona.idRol!=1 && persona.idRol!=2">
+          M-VARIOS
+        </button>
+        <button class="botones" mat-flat-button [routerLink]="'/panel/biblioteca/usoserviciosvarios'"
+                [disabled]="persona.idRol!=1 && persona.idRol!=2">
+          USO
+        </button>
+        <button class="botones" mat-flat-button [routerLink]="'/panel/biblioteca/reportevarios'"
+                [disabled]="persona.idRol!=1 && persona.idRol!=4">
+          REPORTE
+        </button>
+      </mat-expansion-panel>
+      <!--INFORME-->
+      <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" class="botones">
+        <mat-expansion-panel-header>
+          <button mat-flat-button>
+            <mat-icon>book</mat-icon>
+            INFORME
+          </button>
+        </mat-expansion-panel-header>
+        <button class="botones" mat-flat-button [routerLink]="'/panel/biblioteca/informeMensualExel'">
+          <mat-icon>school</mat-icon>
+          EXEL
+        </button>
+      </mat-expansion-panel>
+      <!--CERRAR SESION-->
+      <button class="botones" mat-raised-button (click)="logout()">
+        <mat-icon>exit_to_app</mat-icon>
+        CERRAR SESION
+      </button>
+    </div>
+  </mat-drawer>
+  <div class="example-sidenav-content">
+    <router-outlet></router-outlet>
+  </div>
+</mat-drawer-container>
+</body>
+
+</html>

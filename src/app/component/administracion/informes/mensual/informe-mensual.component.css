@@ -1,0 +1,133 @@
+table {
+    width: 100%;
+
+
+}
+
+.tabla-recursos{
+    width: 50%;
+    border: 1px solid #ecb435;
+    margin: 0 auto;
+    border-collapse: collapse;
+
+}
+
+th, td {
+
+
+    border-bottom: 1px solid #ecb435;
+    background-color: #aedaf5;
+    width: 25%;
+
+ }
+
+ th{
+    background: #ecb435;
+
+ }
+
+
+
+
+.card {
+
+    border: 1px solid #0c3255;
+    border-inline: 5px solid #0c3255;
+    writing-mode: horizontal-tb;
+}
+
+.card21{
+    text-align: center;
+    width: 95%;
+    border: 1px solid #a01b20;
+    border-inline: 3px solid #a01b20;
+    background-color: #f7f2dc;
+
+}
+
+.card3{
+    margin: 1% auto;
+    width: max-content;
+    text-align: center;
+    min-width: min-content;
+    width: 95%;
+    border: 1px solid #455a64;
+    background: rgba(255, 255, 255, 0.81);
+
+
+}
+
+.card4{
+    margin: 1% auto;
+    width: max-content;
+    text-align: center;
+    min-width: min-content;
+    width: 95%;
+    border: 1px solid #455a64;
+    background:#f7f2dc;
+
+
+}
+
+
+
+
+.example-label {
+    display: table-cell;
+    font-size: 14px;
+    margin-left: 8px;
+    min-width: 120px;
+}
+
+
+
+.example-button-row .mat-button-base {
+    margin: 8px 8px 8px 0;
+}
+
+.example-flex-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.example-button-container {
+    display: flex;
+    justify-content: center;
+    width: 120px;
+}
+
+
+
+.center-content {
+    margin-top: 3%;
+    text-align: -webkit-center;
+
+
+}
+
+
+
+
+.example-month-picker .mat-calendar-period-button {
+    pointer-events: none;
+  }
+
+  .example-month-picker .mat-calendar-arrow {
+    display: none;
+  }
+
+
+.transparente{
+    background-color: transparent;
+}
+
+.colorblanco {
+    color: white;
+  }
+
+.colorhueso{
+    background-color: #f7f2dc;
+}
+
+

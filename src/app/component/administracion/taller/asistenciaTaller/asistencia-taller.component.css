@@ -1,0 +1,53 @@
+.busqueda {
+  margin: 0.5% auto;
+  width: 95%;
+  background-color: #f7f2dc;
+}
+
+.filter {
+  width: 100%;
+}
+
+button {
+  width: 25%;
+  margin-left: 1vh;
+}
+
+.seleccion {
+  width: 73%;
+}
+
+.selecciondia {
+  width: 47%;
+}
+
+table {
+  width: 100%;
+}
+
+.selecciontable {
+  font-size: 14px;
+  width: 100%;
+}
+
+td,
+th {
+  width: 25%;
+}
+
+.bordeev {
+  background-color: transparent;
+  border: 2px solid #f7f2dc;
+  width: 1200px;
+  margin: 0.5% auto;
+  margin-bottom: 10px;
+  overflow: hidden;
+  writing-mode: horizontal-tb;
+  padding: 1rem;
+  text-align: center;
+}
+
+
+.colorCrema {
+  background-color: #f7f2dc;
+}

@@ -1,0 +1,818 @@
+<section *ngIf="cardValorCero==true">
+
+  <div class="opcionfd">
+    <div class="opcion1fd">
+      <button mat-flat-button class="botonmenu" (click)="mostrarNuevo()">NUEVA INSCRIPCIÓN</button>
+      <button mat-flat-button class="botonmenu" (click)="mostrarLista()">VER INSCRIPCIONES</button>
+    </div>
+  </div>
+  <br>
+  <mat-card class="borde3">
+
+    <mat-card class="borde2">
+
+      <h1>{{mensajeNoHayDatos}}</h1>
+
+    </mat-card>
+
+
+  </mat-card>
+</section>
+
+<section *ngIf="cardValorDifenteCero==true">
+
+  <div class="opcionfd">
+    <div class="opcion1fd">
+      <button mat-flat-button class="botonmenu" (click)="mostrarNuevo()">NUEVA INSCRIPCIÓN</button>
+      <button mat-flat-button class="botonmenu" (click)="mostrarLista()">VER INSCRIPCIONES</button>
+    </div>
+  </div>
+
+  <!---------------------------------------NUEVA INSCRIPCIÓN----------------------------------------->
+  <div *ngIf="divNuevo==true">
+    <mat-stepper linear #stepper class="borde1">
+      <mat-step [stepControl]="firstFormGroup" [editable]="isEditable">
+        <form [formGroup]="firstFormGroup">
+          <ng-template matStepLabel>
+            <div class="colorclaro">CURSO</div>
+          </ng-template>
+
+
+          <mat-card class="example-card-two">
+
+            <div>
+
+
+              <mat-card class="cardCurso">
+
+
+                <mat-form-field appearance="outline" class="bordeFiltro">
+                  <mat-label>Buscar Curso</mat-label>
+                  <input matInput (keyup)="applyFilterCurso($event)" placeholder="Ex. Colonia Vacacional" #input>
+                  <mat-icon matSuffix>find_in_page</mat-icon>
+                </mat-form-field>
+
+
+                <mat-card-content>
+
+                  <section class="barra-deslizadora" tabindex="0">
+                    <table mat-table [dataSource]="dataSourceCurso" style=" background-color: #f7f2dc ;">
+
+                      <ng-container matColumnDef="nombre">
+                        <th mat-header-cell *matHeaderCellDef>
+                          <div style="text-align: center;">
+                            <h3>MIS CURSOS</h3>
+                          </div>
+                        </th>
+
+                        <td mat-cell *matCellDef="let element">
+
+
+                          <table class="table2">
+                            <tr style="text-align: center;">
+                              <td style="text-align:left ; width: 85%;">
+                                <div class="divtipo1"><strong>NOMBRE:
+                                </strong>{{element.nombre|uppercase}}<br></div>
+                                <div class="divtipo1"><strong>RESPONSABLE:
+                                </strong>{{element.responsable|uppercase}}<br></div>
+                                <div class="divtipo1"><strong>FECHA:
+                                </strong>{{element.fechaMaxInscripcion}} <br></div>
+                              </td>
+
+                              <td>
+                                <button mat-stroked-button class="boton1"
+                                        (click)="contarClientesCurso(element.idCurso,1)">
+                                  <mat-icon>forward</mat-icon>
+                                </button>
+                              </td>
+                            </tr>
+                          </table>
+
+                        </td>
+
+                      </ng-container>
+
+                      <tr mat-header-row *matHeaderRowDef="displayedColumnsCurso"></tr>
+                      <tr mat-row *matRowDef="let row; columns: displayedColumnsCurso;"></tr>
+
+                      <!-- Row shown when there is no matching data. -->
+                      <tr class="mat-row" *matNoDataRow>
+                        <td class="mat-cell" colspan="4">No hay datos que coincidan con el
+                          filtro
+                          "{{input.value}}"
+                        </td>
+                      </tr>
+                    </table>
+                  </section>
+
+
+                </mat-card-content>
+
+
+              </mat-card>
+
+
+              <div *ngIf="cardCursoMensaje==true">
+              </div>
+
+              <mat-card class="cardCurso2" *ngIf="cardCurso==true">
+                <div>
+                  <div style="width: 500px;">
+                    <mat-card-title>
+                      <div style="text-align: center;"> DATOS DE CURSO</div>
+
+                    </mat-card-title>
+                  </div>
+
+
+                  <br>
+                  <mat-card-content>
+
+                    <table class="table2">
+
+                      <tr aria-colspan="6">
+                        <td colspan="1">
+                          <strong>DISPONIBILIDAD: </strong>
+                        </td>
+                        <td colspan="1" class="txt">
+                          <strong> <input class="disponibilidadtxt" readonly="true" matInput
+                                          formControlName="disponibilidad"
+                                          [ngStyle]="{'color': colorDisponibilidad,'background-color':fondoDisponibilidad}"></strong>
+                        </td>
+                      </tr>
+
+                      <tr aria-colspan="6">
+                        <td colspan="1">
+                          <strong>NOMBRE: </strong>
+                        </td>
+                        <td colspan="1" class="txt">
+                          <input readonly="true" matInput formControlName="nombre" required>
+                        </td>
+                      </tr>
+
+                      <tr aria-colspan="6">
+                        <td colspan="1">
+                          <strong>RESPONSABLE: </strong>
+                        </td>
+                        <td colspan="1" class="txt">
+
+                          <input readonly="true" matInput formControlName="responsable" required>
+                        </td>
+                      </tr>
+
+                      <tr aria-colspan="6">
+                        <td colspan="1">
+                          <strong>F. INICIO - F. FIN: </strong>
+                        </td>
+                        <td colspan="1" class="txt">
+                          <input readonly="true" matInput formControlName="fechaInicioFin" required>
+                        </td>
+                      </tr>
+                      <tr aria-colspan="6">
+                        <td colspan="1">
+                          <strong>LUGAR: </strong>
+                        </td>
+                        <td colspan="1" class="txt">
+                          <input readonly="true" matInput formControlName="lugar">
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          <strong>DESCRIPCIÓN: </strong>
+                        </td>
+                        <td>
+                          <textarea readonly="true" matInput formControlName="descripcion" required
+                                    class="texArea"></textarea>
+
+                        </td>
+
+                      </tr>
+
+
+                    </table>
+
+
+                    <table>
+
+                    </table>
+
+                    <br>
+
+                    <div *ngIf="controlbotonSiguiente==true">
+                      <table class="table3">
+                        <tr style="text-align: center;">
+                          <td style="text-align:left ; width: 70%;">
+
+                          </td>
+
+                          <td>
+                            <button mat-button matStepperNext mat-flat-button class="botonnaranja"
+                                    [disabled]="firstFormGroup.invalid">SIGUIENTE
+                              <mat-icon>forward
+                              </mat-icon>
+                            </button>
+                          </td>
+                        </tr>
+
+                      </table>
+
+                    </div>
+
+                    <div *ngIf="controlmensajeSiguiente==true">
+
+
+                      <table class="table3">
+                        <tr style="text-align: center;">
+                          <td style="text-align:left ; width: 70%;">
+
+                          </td>
+
+                          <td>
+                            <strong>{{mensajeSinCupos}}</strong>
+                          </td>
+                        </tr>
+
+                      </table>
+                    </div>
+
+                  </mat-card-content>
+
+                </div>
+
+
+              </mat-card>
+
+
+            </div>
+
+
+          </mat-card>
+
+        </form>
+      </mat-step>
+
+
+      <!--PARTE DE ELECCION DE CLIENTES-->
+
+      <mat-step [stepControl]="secondFormGroup" [editable]="isEditable">
+        <form [formGroup]="secondFormGroup">
+          <ng-template matStepLabel>
+            <div class="colorclaro">CLIENTE</div>
+          </ng-template>
+          <mat-card class="example-card-two">
+
+            <mat-card class="cardCurso">
+
+              <table class="table2">
+                <tr style="text-align: center;">
+                  <td style="text-align:left ; width: 85%;">
+                    <mat-form-field appearance="outline" class="bordeFiltro">
+                      <mat-label>Buscar Cliente</mat-label>
+                      <input matInput (keyup)="applyFilterCliente($event)" placeholder="Ex. Franklin Dominguez" #input>
+                      <mat-icon matSuffix>find_in_page</mat-icon>
+                    </mat-form-field>
+                  </td>
+
+                  <td>
+
+                    <button mat-stroked-button class="boton2" (click)="openDialog()">
+                      <mat-icon>person_add</mat-icon>
+                    </button>
+
+                  </td>
+                </tr>
+              </table>
+
+
+              <mat-card-content>
+
+                <section class="barra-deslizadora" tabindex="0">
+
+
+                  <table mat-table [dataSource]="dataSourceCliente" style="background-color: #f7f2dc ;">
+
+
+                    <ng-container matColumnDef="cedula">
+                      <th mat-header-cell *matHeaderCellDef>
+                        <div style="text-align: center;">
+                          <h3>MIS CLIENTES</h3>
+                        </div>
+                      </th>
+                      <td mat-cell *matCellDef="let element">
+                        <table class="table2">
+                          <tr style="text-align: center;">
+                            <td style="text-align:left ; width: 85%;">
+                              <div class="divtipo1"><strong>CÉDULA:
+                              </strong>{{element.cedula|uppercase}}<br></div>
+                              <div class="divtipo1"><strong>NOMBRE:
+                              </strong>{{element.nombres|uppercase}} {{element.apellidos|uppercase}}<br></div>
+                              <div class="divtipo1"><strong>EDAD:
+                              </strong>{{element.edad}} <br></div>
+                            </td>
+
+                            <td>
+                              <button mat-stroked-button class="boton1" (click)="cargarDatosCliente(element.idCliente)">
+                                <mat-icon>forward</mat-icon>
+                              </button>
+                            </td>
+                          </tr>
+                        </table>
+                      </td>
+                    </ng-container>
+
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumnsCliente"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumnsCliente;"></tr>
+
+                    <!-- Row shown when there is no matching data. -->
+                    <tr class="mat-row" *matNoDataRow>
+                      <td class="mat-cell" colspan="4">No hay datos que coincidan con el
+                        filtro
+                        "{{input.value}}"
+                      </td>
+                    </tr>
+                  </table>
+
+                </section>
+
+
+              </mat-card-content>
+
+
+            </mat-card>
+
+            <div *ngIf="cardClienteMensaje==true">
+
+            </div>
+
+            <mat-card class="cardCurso" *ngIf="cardCliente==true">
+
+
+              <div>
+                <div style="width: 500px;">
+                  <mat-card-title>
+                    <div style="text-align: center;"> DATOS DE CLIENTE</div>
+
+                  </mat-card-title>
+                </div>
+                <br>
+                <mat-card-content>
+
+                  <table class="table2">
+
+                    <tr aria-colspan="6">
+                      <td colspan="1">
+                        <strong>CÉDULA: </strong>
+                      </td>
+                      <td colspan="1" class="txt">
+                        <input readonly="true" matInput formControlName="cedula" required>
+                      </td>
+                    </tr>
+
+                    <tr aria-colspan="6">
+                      <td colspan="1">
+                        <strong>NOMBRES: </strong>
+                      </td>
+                      <td colspan="1" class="txt">
+                        <input readonly="true" matInput formControlName="nombres" required>
+                      </td>
+                    </tr>
+
+                    <tr aria-colspan="6">
+                      <td colspan="1">
+                        <strong>EDAD: </strong>
+                      </td>
+                      <td colspan="1" class="txt">
+                        <input readonly="true" matInput formControlName="edad" required>
+                      </td>
+                    </tr>
+
+                    <tr aria-colspan="6">
+                      <td colspan="1">
+                        <strong>EMAIL: </strong>
+                      </td>
+                      <td colspan="1" class="txt">
+                        <input readonly="true" matInput formControlName="email" required>
+                      </td>
+                    </tr>
+                    <tr aria-colspan="6">
+                      <td colspan="1">
+                        <strong>DIRECCIÓN: </strong>
+                      </td>
+                      <td colspan="1" class="txt">
+                        <input readonly="true" matInput formControlName="direccion" required>
+                      </td>
+                    </tr>
+
+                    <tr aria-colspan="6">
+                      <td colspan="1">
+                        <strong>REPRESENTANTE: </strong>
+                      </td>
+                      <td colspan="1" class="txt">
+                        <input readonly="true" matInput formControlName="representante" required>
+                      </td>
+                    </tr>
+
+
+                  </table>
+
+                  <br>
+
+                  <table class="table2">
+                    <tr style="text-align: center;">
+                      <td style="text-align:left ; width: 70%;">
+
+                        <button mat-button matStepperPrevious class="botonrojo">
+                          <mat-icon>reply</mat-icon>
+                          REGRESAR
+                        </button>
+
+                      </td>
+
+                      <div *ngIf="controlbotonSiguiente==true">
+                        <td>
+                          <button [disabled]="secondFormGroup.invalid" mat-button matStepperNext mat-flat-button
+                                  class="botonnaranja">SIGUIENTE
+                            <mat-icon>forward
+                            </mat-icon>
+                          </button>
+                        </td>
+                      </div>
+
+                      <div *ngIf="controlmensajeSiguiente==true">
+                        <td>
+                          <strong>{{mensajeSinCupos}}</strong>
+                        </td>
+                      </div>
+
+
+                    </tr>
+
+                  </table>
+
+                </mat-card-content>
+              </div>
+
+
+            </mat-card>
+          </mat-card>
+        </form>
+      </mat-step>
+
+
+      <!--PARTE final-->
+
+      <mat-step>
+        <ng-template matStepLabel>
+          <div class="colorclaro">CONFIRMACIÓN</div>
+        </ng-template>
+
+
+        <mat-card class="example-card-two">
+          <div>
+
+            <form [formGroup]="firstFormGroup">
+
+
+              <mat-card class="cardCurso2">
+
+                <div style="width: 500px;">
+                  <mat-card-title>
+                    <div style="text-align: center;"> DATOS DE CURSO</div>
+
+                  </mat-card-title>
+                </div>
+
+
+                <br>
+                <mat-card-content>
+
+                  <table class="table2">
+
+                    <tr aria-colspan="6">
+                      <td colspan="1">
+                        <strong>DISPONIBILIDAD: </strong>
+                      </td>
+                      <td colspan="1" class="txt">
+                        <input readonly="true" matInput formControlName="disponibilidad" required>
+                      </td>
+                    </tr>
+
+                    <tr aria-colspan="6">
+                      <td colspan="1">
+                        <strong>NOMBRE: </strong>
+                      </td>
+                      <td colspan="1" class="txt">
+                        <input readonly="true" matInput formControlName="nombre" required>
+                      </td>
+                    </tr>
+
+                    <tr aria-colspan="6">
+                      <td colspan="1">
+                        <strong>RESPONSABLE: </strong>
+                      </td>
+                      <td colspan="1" class="txt">
+
+                        <input readonly="true" matInput formControlName="responsable" required>
+                      </td>
+                    </tr>
+
+                    <tr aria-colspan="6">
+                      <td colspan="1">
+                        <strong>F. INICIO - F. FIN: </strong>
+                      </td>
+                      <td colspan="1" class="txt">
+                        <input readonly="true" matInput formControlName="fechaInicioFin" required>
+                      </td>
+                    </tr>
+                    <tr aria-colspan="6">
+                      <td colspan="1">
+                        <strong>LUGAR: </strong>
+                      </td>
+                      <td colspan="1" class="txt">
+                        <input readonly="true" matInput formControlName="lugar">
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td>
+                        <strong>DESCRIPCIÓN: </strong>
+                      </td>
+                      <td>
+                        <textarea readonly="true" matInput formControlName="descripcion" required
+                                  class="texArea"></textarea>
+
+                      </td>
+
+                    </tr>
+
+
+                  </table>
+
+
+                  <table>
+
+                  </table>
+
+                  <br>
+
+                </mat-card-content>
+              </mat-card>
+            </form>
+
+            <form [formGroup]="secondFormGroup">
+              <mat-card class="cardCurso">
+                <div style="width: 500px;">
+                  <mat-card-title>
+                    <div style="text-align: center;"> DATOS DE CLIENTE</div>
+
+                  </mat-card-title>
+                </div>
+                <br>
+                <mat-card-content>
+
+                  <table class="table2">
+
+                    <tr aria-colspan="6">
+                      <td colspan="1">
+                        <strong>CÉDULA: </strong>
+                      </td>
+                      <td colspan="1" class="txt">
+                        <input readonly="true" matInput formControlName="cedula" required>
+                      </td>
+                    </tr>
+
+                    <tr aria-colspan="6">
+                      <td colspan="1">
+                        <strong>NOMBRES: </strong>
+                      </td>
+                      <td colspan="1" class="txt">
+                        <input readonly="true" matInput formControlName="nombres" required>
+                      </td>
+                    </tr>
+
+                    <tr aria-colspan="6">
+                      <td colspan="1">
+                        <strong>EDAD: </strong>
+                      </td>
+                      <td colspan="1" class="txt">
+                        <input readonly="true" matInput formControlName="edad" required>
+                      </td>
+                    </tr>
+
+                    <tr aria-colspan="6">
+                      <td colspan="1">
+                        <strong>EMAIL: </strong>
+                      </td>
+                      <td colspan="1" class="txt">
+                        <input readonly="true" matInput formControlName="email" required>
+                      </td>
+                    </tr>
+                    <tr aria-colspan="6">
+                      <td colspan="1">
+                        <strong>DIRECCIÓN: </strong>
+                      </td>
+                      <td colspan="1" class="txt">
+                        <input readonly="true" matInput formControlName="direccion" required>
+                      </td>
+                    </tr>
+
+                    <tr aria-colspan="6">
+                      <td colspan="1">
+                        <strong>REPRESENTANTE: </strong>
+                      </td>
+                      <td colspan="1" class="txt">
+                        <input readonly="true" matInput formControlName="representante" required>
+                      </td>
+                    </tr>
+
+
+                  </table>
+
+                  <br>
+
+                </mat-card-content>
+              </mat-card>
+            </form>
+
+
+            <table class="table2" style=" background-color: transparent;">
+              <tr style="text-align: center;">
+                <td style="text-align:left;">
+
+                </td>
+                <td></td>
+                <td></td>
+
+                <div class="td1">
+                  <td>
+                    <div>
+                      <button mat-button matStepperPrevious class="botonrojo">
+                        <mat-icon>reply</mat-icon>
+                        REGRESAR
+                      </button>
+                    </div>
+                  </td>
+
+
+                  <td>
+                    <div *ngIf="controlbotonSiguiente==true">
+                      <button mat-button class="botonnaranja" (click)="guardarclienteCurso()">
+                        GUARDAR
+                        <mat-icon>save</mat-icon>
+                      </button>
+                    </div>
+
+                    <div *ngIf="controlmensajeSiguiente==true">
+                      <strong> {{mensajeSinCuposGuardar}}</strong>
+                    </div>
+
+                  </td>
+                </div>
+
+              </tr>
+
+
+            </table>
+
+
+          </div>
+        </mat-card>
+
+
+      </mat-step>
+    </mat-stepper>
+  </div>
+
+  <!---------------------------------------LISTAR----------------------------------------->
+
+
+  <br>
+  <mat-card class="borde3" *ngIf="divListar==true">
+
+    <mat-card class="borde2">
+
+      <form [formGroup]="formList">
+        <mat-form-field appearance="outline" class="seleccion">
+          <mat-label>Seleccione un Curso</mat-label>
+          <mat-select formControlName="valorSelect" (selectionChange)="listarParticipantesCurso(1,$event)">
+            <mat-option *ngFor="let option of cursoLista" [value]="option.idCurso">{{option.nombre|uppercase}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+      </form>
+
+    </mat-card>
+
+    <mat-card class="borde2" *ngIf="cardListarModulo==true">
+
+      <mat-form-field appearance="outline" class="bordeFiltro">
+        <mat-label>Buscar Curso</mat-label>
+        <input matInput (keyup)="applyFilter1($event)" placeholder="Ex. Colonia Vacacional" #input>
+        <mat-icon matSuffix>find_in_page</mat-icon>
+      </mat-form-field>
+
+      <div class="mat-elevation-z8">
+
+
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="background-color: #f7f2dc;">
+
+          <!-- Position Column -->
+          <ng-container matColumnDef="position">
+            <th mat-header-cell *matHeaderCellDef style="text-align: center;"> ID</th>
+            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="cedula">
+            <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Cedula</th>
+            <td mat-cell *matCellDef="let element"><strong> {{element.cedula}} </strong></td>
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="nombres">
+            <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Nombres</th>
+            <td mat-cell *matCellDef="let element"> {{element.nombres|uppercase}} </td>
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="apellidos">
+            <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Apellidos</th>
+            <td mat-cell *matCellDef="let element"> {{element.apellidos|uppercase}} </td>
+          </ng-container>
+
+
+          <!-- Symbol Column -->
+          <ng-container matColumnDef="eliminar">
+            <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Eliminar</th>
+            <td mat-cell *matCellDef="let element">
+              <button mat-raised-button color="primary"
+                      (click)="eliminarClienteCurso(element.id)"> ELIMINAR
+              </button>
+            </td>
+          </ng-container>
+
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+          <!-- Row shown when there is no matching data. -->
+          <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="4">No hay datos que coincidan con el filtro "{{input.value}}"</td>
+          </tr>
+        </table>
+
+      </div>
+    </mat-card>
+
+    <mat-card class="borde2" *ngIf="cardListarVacio==true">
+
+      <h1>{{mensajeSinParticiantes}}</h1>
+    </mat-card>
+
+  </mat-card>
+
+
+</section>
+<!------------------------------------------------------------------------------------------------------------------------------------------>
+
+<!------------------------------------------------------------------------------------------------------------------------------------------>
+<!--Dialogo para crear cliente-->
+
+<p-dialog [(visible)]="dialogoCliente" [style]="{width:'43vw'}" [draggable]="false" [baseZIndex]="10000" [modal]="true"
+          styleClass="p-fluid">
+  <ng-template pTemplate="content">
+
+    <mat-card class="dialogo">
+
+      <form [formGroup]="formCliente">
+
+
+        <app-nuevoCliente></app-nuevoCliente>
+        <table>
+          <tr style="text-align: center;">
+            <td style="text-align:left ; width: 60%;">
+
+            </td>
+            <td>
+              <button mat-button class="botonrojo" (click)="dialogoCliente=false" (click)=" listarClientes()">
+                <mat-icon>close</mat-icon>
+                CERRAR
+              </button>
+
+
+            </td>
+          </tr>
+        </table>
+
+
+      </form>
+
+
+    </mat-card>
+
+  </ng-template>
+
+</p-dialog>

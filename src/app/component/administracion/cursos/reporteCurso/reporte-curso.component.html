@@ -1,0 +1,79 @@
+<br>
+
+<div class="container">
+  <div class="header">
+    <h1>REPORTE DE CURSOS</h1>
+    <h2>USUARIOS POR GÉNERO</h2>
+    <mat-progress-bar *ngIf="cargar" mode="indeterminate"></mat-progress-bar>
+  </div>
+  <div class="left">
+    <div>
+      <h3>CONSULTAR DATOS</h3>
+      <mat-form-field appearance="outline" class="filter">
+        <mat-label>Ingrese el Año</mat-label>
+        <input matInput type="number" placeholder="2022" min="2000" max="3000" (change)="filterAnio($event)">
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="filter">
+        <mat-label>Filtrar Cursos</mat-label>
+        <input matInput placeholder="Placeholder" [formControl]="myControl">
+        <mat-icon matSuffix>find_in_page</mat-icon>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="seleccion">
+        <mat-label>Seleccione el Curso</mat-label>
+        <mat-select #cursoSelect>
+          <mat-option *ngFor="let curso of dataCursos | async" [value]="curso">{{curso.nombre}}
+            de {{curso.fechaFin | date:'MMMM-YYYY'}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button mat-flat-button color="warn" (click)="consultaDatos(cursoSelect)">CONSULTAR</button>
+      <mat-divider inset></mat-divider>
+      <button mat-flat-button color="warn" (click)="generatePDF(cursoSelect)">OBTENER PDF</button>
+    </div>
+  </div>
+  <div class="right" *ngIf="habilitar">
+    <mat-grid-list cols="3" rowHeight="59.7px" class="table">
+      <mat-grid-tile colspan="2">
+        <strong>
+          CUADRO DE DATOS SEGÚN EL GÉNERO
+        </strong>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <h2>%</h2>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        MASCULINO
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <h3>{{reporteCurso.n_Masculino}}</h3>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <h3>{{reporteCurso.porcent_Masculino}}%</h3>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        FEMENINO
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <h3>{{reporteCurso.n_Femenino}}</h3>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <h3>{{reporteCurso.porcent_Femenino}}%</h3>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        OTRO
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <h3>{{reporteCurso.n_Otro}}</h3>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <h3>{{reporteCurso.porcent_Otro}}%</h3>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <h4>TOTAL: </h4>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <h2>{{reporteCurso.total}}</h2>
+      </mat-grid-tile>
+      <mat-grid-tile></mat-grid-tile>
+    </mat-grid-list>
+  </div>
+</div>

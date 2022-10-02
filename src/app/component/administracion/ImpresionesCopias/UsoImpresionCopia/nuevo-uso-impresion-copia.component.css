@@ -1,0 +1,250 @@
+.opcionfd {
+
+  background-color: #f47f16;
+}
+
+.opcion1fd {
+  text-align: center;
+
+}
+
+.botonmenu {
+  background-color: #f47f16;
+  padding: 6px;
+  border-color: transparent;
+  color: #803f00;
+}
+
+.example-card-two {
+  width: 95%;
+  margin: 0.5% auto;
+  border: 2px solid #f7f2dc;
+  background-color: transparent;
+  overflow: hidden;
+}
+
+
+
+.cardCurso {
+  background-color: #f7f2dc;
+  width: 44%;
+  float: left;
+  margin-left: 25px;
+  margin-bottom: 10px;
+  border: 1px solid #0c3255;
+  height: 500px;
+  overflow: hidden;
+  writing-mode: horizontal-tb;
+}
+
+.cardTipo2 {
+  background-color: transparent;
+  width: 44%;
+  float: left;
+  margin-left: 25px;
+  margin-bottom: 10px;
+  border: 1px solid #0c3255;
+  height: 500px;
+  overflow: hidden;
+  writing-mode: horizontal-tb;
+}
+
+.colorFondo {
+  background-color: #f7f2dc;
+  text-align: center;
+  width: 85%;
+  left: 21px;
+}
+
+.table2 {
+  width: 100%;
+  margin: 1%;
+  background-color: #f7f2dc;
+}
+
+.bordeFiltro {
+  width: 100%;
+  margin-bottom: 4%;
+}
+
+.barra-deslizadora {
+  background-color: #f7f2dc;
+  height: 420px;
+  width: 500px;
+  max-width: 100%;
+  overflow: auto;
+}
+
+.boton1 {
+  background-color: #b4cc17;
+  color: #0f0535;
+}
+
+.boton2 {
+  background-color: #777332;
+
+  padding: 1px;
+}
+
+.divtipo1 {
+  margin: 1.5%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+mat-grid-tile {
+  background: lightblue;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+mat-grid-tile {
+  text-align: start;
+}
+
+mat-form-field {
+  height: 60px;
+  width: 95%;
+}
+
+mat-label {
+  color: black;
+}
+
+.example-section {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  height: 60px;
+}
+
+.example-margin {
+  margin: 1vh 10px;
+}
+
+
+td, th {
+  width: 15%;
+}
+
+
+
+.botonnaranja {
+  background-color: #ecb435;
+  color: #000000;
+}
+
+.botonrojo {
+  background-color: #a01b20;
+  color: #FFFFFF;
+}
+
+.txt {
+  width: 70%;
+}
+
+.txt input {
+  display: block;
+  width: 90%;
+  padding: 15px 5px;
+  margin-bottom: 2%;
+  font-size: 16px;
+  border: 1px solid #F2921D;
+  transition: border-width 0.2s ease;
+  border-radius: 4px;
+  color: #000000;
+  outline: none;
+}
+
+
+
+
+
+
+
+
+.td1 {
+  background-color: #f7f2dc;
+  width: 150px;
+  border: 1px solid #000000;
+  border-radius: 5px;
+  padding: 2px;
+}
+
+.colorclaro {
+  color: white;
+}
+
+.texArea {
+  border: 1px solid #88c515;
+  border-radius: 3px;
+  position: relative;
+  right: 10px;
+  width: 347px
+}
+
+
+.dialogo {
+  width: '37vw';
+  background-color: #f7f2dc;
+  border: 1px solid #000000;
+}
+
+.tamanopeque{
+  width: 10%;
+ 
+}
+
+.tamanogrande{
+  width: 30%;
+  text-align: justify;
+ 
+}
+
+.textoInicio{
+  text-align: left;
+}
+
+
+.textoCentro{
+  text-align: center;
+}
+
+.tamaño4{
+  width: 30%;
+}
+
+.bordeev {
+  background-color: transparent;
+  border: 2px solid #f7f2dc;
+  width: 800px;
+  margin: 0.5% auto;
+  margin-bottom: 10px;
+  overflow: hidden;
+  writing-mode: horizontal-tb;
+  padding: 1rem;
+  text-align: center;
+}
+
+
+

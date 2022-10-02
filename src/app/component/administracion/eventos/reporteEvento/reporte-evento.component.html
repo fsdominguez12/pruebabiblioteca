@@ -1,0 +1,51 @@
+<div class="container">
+  <div class="header">
+    <h1>REPORTE DE EVENTOS</h1>
+    <h2>USUARIOS POR GÉNERO</h2>
+    <mat-progress-bar *ngIf="cargar" mode="indeterminate"></mat-progress-bar>
+  </div>
+  <div class="left">
+    <div>
+      <h3>CONSULTAR DATOS</h3>
+      <!--<section class="example-section">
+        <label class="example-margin">Consultar por:</label>
+        <mat-radio-group (change)="select($event)">
+          <mat-radio-button class="example-margin" [value]="'ANUAL'">ANUAL</mat-radio-button>
+          <mat-radio-button class="example-margin" [value]="'MENSUAL'">MENSUAL</mat-radio-button>
+        </mat-radio-group>
+      </section>-->
+      <mat-divider></mat-divider>
+      <br>
+      <mat-form-field appearance="outline" class="dates" *ngIf="seleccion=='DIARIO'">
+        <mat-label>Ingrese el Dia</mat-label>
+        <input matInput [matDatepicker]="picker">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="dates">
+        <mat-label>Ingrese el Mes</mat-label>
+        <input matInput type="month" #meses >
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="dates" *ngIf="seleccion=='ANUAL'">
+        <mat-label>Ingrese el Año</mat-label>
+        <input matInput type="number" placeholder="2022" min="2000" max="3000" >
+      </mat-form-field>
+      <button mat-flat-button color="warn" (click)="consultarDatos(meses)">CONSULTAR</button>
+      <mat-divider inset></mat-divider>
+      <button mat-flat-button color="warn" (click)="generatePDF(meses)">OBTENER PDF</button>
+    </div>
+  </div>
+  <div class="right">
+    <mat-grid-list cols="2" rowHeight="59.7px" *ngIf=habilitar>
+      <mat-grid-tile colspan="2">
+        <strong>
+          CUADRO DE DATOS
+        </strong>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        Nº EVENTOS
+      </mat-grid-tile>
+      <mat-grid-tile><h3>{{evento.length}}</h3></mat-grid-tile>
+    </mat-grid-list>
+  </div>
+</div>

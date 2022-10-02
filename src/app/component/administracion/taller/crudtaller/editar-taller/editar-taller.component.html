@@ -1,0 +1,74 @@
+<mat-card class="example-card" style="background: #f7f2dc">
+  <form [formGroup]="formGrupos">
+    <mat-card-content style="background: #f7f2dc">
+      <mat-grid-list cols="2" rowHeight="5:0.9">
+        <h3>CURSOS</h3>
+        <h4>DATOS DEL TALLER</h4>
+        <div>
+          <mat-grid-tile>
+            <mat-form-field appearance="outline">
+              <mat-label>Nombre del taller</mat-label>
+              <input matInput formControlName="nombre">
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile rowspan="2">
+            <mat-form-field appearance="outline">
+              <mat-label>Descripción</mat-label>
+              <textarea matInput formControlName="descripcion"></textarea>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <mat-form-field appearance="outline">
+              <mat-label>Nombre del Responsable</mat-label>
+              <input matInput formControlName="responsable">
+            </mat-form-field>
+          </mat-grid-tile>
+
+        </div>
+
+        <div>
+          <mat-grid-tile>
+            <mat-form-field appearance="outline">
+              <mat-label>Fecha de duración</mat-label>
+              <mat-date-range-input [rangePicker]="picker">
+                <input matStartDate formControlName="fechaInicio" placeholder="Start date">
+                <input matEndDate formControlName="fechaFin" placeholder="End date">
+              </mat-date-range-input>
+              <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-date-range-picker #picker></mat-date-range-picker>
+            </mat-form-field>
+          </mat-grid-tile>
+
+          <mat-grid-tile>
+            <mat-form-field color="accent" appearance="outline">
+              <mat-label>Fecha máxima de inscripción</mat-label>
+              <input matInput [matDatepicker]="picker1" formControlName="fechaMaxInscripcion">
+              <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+              <mat-datepicker #picker1></mat-datepicker>
+            </mat-form-field>
+          </mat-grid-tile>
+
+          <!--              <mat-grid-tile rowspan="2">-->
+          <!--                <mat-form-field appearance="outline">-->
+          <!--                  <mat-label>Observacón</mat-label>-->
+          <!--                  <textarea matInput formControlName="materiales"></textarea>-->
+          <!--                </mat-form-field>-->
+          <!--              </mat-grid-tile>-->
+
+          <mat-grid-tile>
+            <mat-form-field appearance="outline">
+              <mat-label>Lugar</mat-label>
+              <input matInput formControlName="lugar">
+            </mat-form-field>
+          </mat-grid-tile>
+
+        </div>
+
+
+      </mat-grid-list>
+    </mat-card-content>
+    <button mat-flat-button color="warn" [disabled]="formGrupos.invalid" (click)="guardarTaller()">REGISTRAR
+    </button>
+  </form>
+</mat-card>

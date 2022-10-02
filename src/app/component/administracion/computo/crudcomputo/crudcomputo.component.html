@@ -1,0 +1,146 @@
+<mat-tab-group mat-align-tabs="center" (selectedIndexChange)="selected.setValue($event)"  [selectedIndex]="selected.value" backgroundColor="primary" color="warn">
+  <mat-tab label="NUEVA COMPUTADORA">
+    <mat-card class="example-card" style="background: #f7f2dc">
+      <mat-progress-bar *ngIf="loaderGuardar" mode="indeterminate"></mat-progress-bar>
+      <form [formGroup]="formGrupos">
+        <mat-card-content style="background: #f7f2dc">
+          <mat-grid-list cols="2" rowHeight="5:0.9">
+            <h3>COMPUTADORES</h3>
+            <h4>DATOS DEL COMPUTADOR</h4>
+            <div>
+              <mat-grid-tile>
+                <mat-form-field appearance="outline">
+                  <mat-label>Número Computador</mat-label>
+                  <input matInput formControlName="numero">
+                </mat-form-field>
+              </mat-grid-tile>
+              <mat-grid-tile rowspan="2">
+                <label id="example-radio-group-label">Estado del computador</label>
+                <mat-radio-group formControlName="estado"
+                  aria-labelledby="example-radio-group-label"
+                  class="example-radio-group">
+                  <mat-radio-button class="example-margin" [value]="false">Activo</mat-radio-button>
+                  <mat-radio-button class="example-margin" [value]="true">Inactivo</mat-radio-button>
+                </mat-radio-group>
+              </mat-grid-tile>
+              <mat-grid-tile>
+                <mat-form-field appearance="outline">
+                  <mat-label>Procesador</mat-label>
+                  <input matInput formControlName="procesador">
+                </mat-form-field>
+              </mat-grid-tile>
+
+            </div>
+
+            <div>
+              <mat-grid-tile>
+                <mat-form-field appearance="outline">
+                  <mat-label>Memoria RAM</mat-label>
+                  <input matInput formControlName="ram">
+                </mat-form-field>
+              </mat-grid-tile>
+
+              <mat-grid-tile>
+                <mat-form-field appearance="outline">
+                  <mat-label>Disco Duro</mat-label>
+                  <input matInput formControlName="discoDuro">
+                </mat-form-field>
+              </mat-grid-tile>
+
+
+            </div>
+
+            <div>
+
+              <mat-grid-tile colspan="2">
+                <mat-form-field appearance="outline">
+                  <mat-label>Observaciones</mat-label>
+                  <input matInput formControlName="observacionesComputador">
+                </mat-form-field>
+              </mat-grid-tile>
+
+            </div>
+
+          </mat-grid-list>
+        </mat-card-content>
+        <button mat-flat-button color="warn" [disabled]="formGrupos.invalid" (click)="guardarCliente()" >GUARDAR
+        </button>
+      </form>
+    </mat-card>
+  </mat-tab>
+  <mat-tab label="VER COMPUTADORAS">
+    <mat-card class="example-card-two" style="background-color: #f7f2dc;">
+      <mat-progress-bar *ngIf="loaderActualizar" mode="indeterminate"></mat-progress-bar>
+      <mat-card-content>
+        <mat-form-field appearance="standard">
+          <mat-label>Buscar Computadora</mat-label>
+          <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
+          <mat-icon matSuffix>find_in_page</mat-icon>
+        </mat-form-field>
+
+        <div class="mat-elevation-z8">
+          <table mat-table [dataSource]="dataSource" matSort style="background-color: #f7f2dc;">
+
+            <!-- ID Column -->
+            <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> ID</th>
+              <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+            </ng-container>
+
+
+            <ng-container matColumnDef="numero">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Número de Computadora</th>
+              <td mat-cell *matCellDef="let row">{{row.numero}}
+              </td>
+            </ng-container>
+
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="disco">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Disco Duro</th>
+              <td mat-cell *matCellDef="let row"> {{row.discoDuro}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="procesador">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Procesador</th>
+              <td mat-cell *matCellDef="let row"> {{row.procesador}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="observaciones">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Observaciones</th>
+              <td mat-cell *matCellDef="let row"> {{row.observacionesComputador}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Estado">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Estado</th>
+              <td mat-cell *matCellDef="let row">
+                <strong *ngIf="row.estado==false">Activo</strong>
+                <strong *ngIf="row.estado==true">Inactivo</strong>
+              </td>
+            </ng-container>
+
+
+
+            <ng-container matColumnDef="acciones">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Acciones</th>
+              <td mat-cell *matCellDef="let row">
+                <button mat-flat-button color="primary" (click)="actualizarComputo(row.id)">Editar</button>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+            <!-- Row shown when there is no matching data. -->
+            <tr class="mat-row" *matNoDataRow>
+              <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+            </tr>
+          </table>
+
+          <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </mat-tab>
+</mat-tab-group>
+

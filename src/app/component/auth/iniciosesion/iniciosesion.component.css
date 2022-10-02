@@ -1,0 +1,33 @@
+body{
+  background-image: url("src/assets/images/elvalle.jpg");
+  background-position: center; /* Center the image */
+  background-size: cover; /* Resize the background image to cover the entire container */
+  position: absolute;
+  width: 100%;
+}
+.example-card {
+  max-width: 400px;
+  margin: 10% auto;
+  background: repeating-linear-gradient(#ecb435,#aedaf5,#ffff);
+}
+.example-header-image {
+  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-size: cover;
+}
+.header{
+  color: white;
+  background-color: #a01b20;
+  border-radius: 10px;
+  text-align: center;
+}
+
+mat-form-field {
+  width: 100%;
+}
+mat-card-actions{
+  text-align: center;
+  color: white;
+}
+
+
+
