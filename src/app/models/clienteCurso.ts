@@ -13,6 +13,8 @@ export class CursoClientes {
     responsable: any;
     // listaClientesRequests:ListaClientesRequests[];
 
+    
+
 }
 
 
